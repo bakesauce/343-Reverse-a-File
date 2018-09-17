@@ -31,6 +31,10 @@ int main (int argc, char* argv[]) {
 	
 	//Allocates memory for tempbuffer
 	tempbuffer = malloc(sizeof(char) * (filesize));
+	if (tempbuffer == NULL) {
+		fprintf( stderr, "Failed to allocate sufficient bytes into the buffer." );
+		exit(1);
+	}
 	
 	//Loop to reverse the buffer. x starts at the end of the filesize, placeinbuff starts at 0
 	for (x = filesize - 1; x >= 0; --x) {

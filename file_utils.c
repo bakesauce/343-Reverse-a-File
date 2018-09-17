@@ -24,13 +24,16 @@ int read_file( char* filename, char **buffer ) {
 
 	//Error handling to check if the file was able to be opened
 	if ( fp == NULL) {
-		printf("Error opening file!");
-		
+		fprintf( stderr, "Failed to open the file." );
 		exit(1);
 	} else {
 		//reads the contents of the file into the buffer after allocating
 		//proper memory for the buffer.
 		*buffer = malloc(sizeof(char) * (size));
+		if (buffer == NULL) {
+			fprintf( stderr, "Failed to allocate sufficient bytes into the buffer." );
+			exit(1);
+		}
 		fread(*buffer, sizeof(char), size, fp);
 		fclose(fp);
 		
@@ -46,8 +49,7 @@ int write_file( char* filename, char *buffer, int size) {
 	
 	//Error handling to check if the file was able to be opened
 	if ( fp == NULL ) {
-		printf("Error opening file!");
-		
+		fprintf( stderr, "Failed to open the file." );
 		exit(1);
 	} else {
 		//Writes the contents of buffer into the file
